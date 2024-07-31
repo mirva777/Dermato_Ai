@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .file-input {
+            margin: 20px 0;
+        }
+        .btn-submit {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skin Disease Prediction</h1>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" name="file" class="file-input" required>
+            <button type="submit" class="btn-submit">Predict</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileField = document.querySelector('input[type="file"]');
+            formData.append('file', fileField.files[0]);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
+        });
+    </script>
+</body>
+</html>
