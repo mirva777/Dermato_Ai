@@ -37,6 +37,10 @@ def preprocess_image(image_path, target_size):
 def index():
     return render_template('index.html')
 
+@app.route('/ping')
+def index():
+    print("pong")
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
