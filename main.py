@@ -83,7 +83,16 @@ def predict():
     try:
         response = requests.post(external_url, json=data)
         response.raise_for_status()
-        external_result = response.json()
+        # Load the outer JSON string into a dictionary
+        outer_dict = json.loads(response.content.decode('utf-8') )
+
+# Extract the inner JSON string
+        inner_json_string = outer_dict["response"]
+        response_result = {
+             "title": predicted_class_name,
+             "response":inner_json_string  # Decoding bytes to string
+            }
+        external_result = json.dumps(response_result)
     except requests.exceptions.RequestException as e:
         return jsonify({'error': f'Error communicating with external service: {str(e)}'}), 500
 
