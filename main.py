@@ -58,7 +58,7 @@ def predict():
 
     # Predictions
     predictions = model.predict(img_array)
-    threshold = 0.5
+    threshold = 0.8
 
     # Predicted class
     predicted_class_index = np.argmax(predictions)
