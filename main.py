@@ -63,7 +63,7 @@ def predict():
     # Predicted class
     predicted_class_index = np.argmax(predictions)
     predicted_class_confidence = predictions[0][predicted_class_index]
-    print("predicted_class_confidence " + predicted_class_confidence)
+    print(f"predicted_class_confidence: {predicted_class_confidence}")
 
     # Statement to determine the illness
     if predicted_class_confidence > threshold:
@@ -77,7 +77,7 @@ def predict():
 
     # Probability for each class
     probabilities = {class_names[idx]: f"{predictions[0][idx]:.2f}" for idx in class_names}
-    print("probabilities " + probabilities)
+    print(f"probabilities: {probabilities}")
     result['Probabilities'] = probabilities
     data={"message":json.dumps(result)+"if you get this type of prompt, this is response from our skin scanner ai, so you have to give to user some info about result, confidence is the prediction percentage, predicted class is the diagnose, you say your diagnose is \"predicted class\", this prediction has accuracy \"confidence\", than you give short info about the illness and recommend specific doctor to visit(like dermatologist and etc), in the end you include privacy and policy message, like the ai is not 100 percent correct and it cannot detect other objects and some times can give false info and that ai doesn't take any responsibilities."
      } 
